@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Irrigation History | Smart Irrigation</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/history.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            💧 <span>Smart Irrigation</span>
+        </div>
+
+        <p class="nav-label">MAIN MENU</p>
+
+        <nav>
+            <a href="dashboard.html">▦ Dashboard</a>
+            <a href="field-details.html">🌾 Field Details</a>
+            <a class="active" href="history.html">📊 Irrigation History</a>
+            <a href="settings.html">⚙️ Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-card">
+                <span>🌱</span>
+                <strong>Smart Farming</strong>
+                <small>Grow better. Save water.</small>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">
+                ↪ Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">FARM MANAGEMENT / HISTORY</p>
+                <h1>Irrigation History</h1>
+                <p class="page-subtitle">
+                    Track your previous weather checks and irrigation activities.
+                </p>
+            </div>
+
+            <div class="farmer-profile">
+                👨‍🌾
+                <div>
+                    <strong id="farmerName">Farmer</strong>
+                    <small id="farmerId">F001</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME BANNER -->
+        <section class="history-banner">
+
+            <div>
+                <span>IRRIGATION ACTIVITY REPORT</span>
+
+                <h2>Your Field Activity</h2>
+
+                <p>
+                    Monitor previous weather conditions, soil moisture
+                    and irrigation decisions.
+                </p>
+            </div>
+
+            <div class="banner-icon">📊</div>
+
+        </section>
+
+
+        <!-- SUMMARY CARDS -->
+        <section class="section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>History Overview</h2>
+                    <p>Summary of your recorded irrigation activities</p>
+                </div>
+
+                <span class="section-tag">SUMMARY</span>
+            </div>
+
+            <div class="history-summary">
+
+                <div class="summary-card">
+                    <div class="summary-icon">📋</div>
+                    <span>Total Records</span>
+                    <h2 id="totalRecords">0</h2>
+                    <small>Saved history entries</small>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon">💧</div>
+                    <span>Average Soil Moisture</span>
+                    <h2 id="averageMoisture">--</h2>
+                    <small>Based on available readings</small>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon">🌧️</div>
+                    <span>Rain Records</span>
+                    <h2 id="rainRecords">0</h2>
+                    <small>Records showing rain</small>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-icon">🚰</div>
+                    <span>Pump ON Records</span>
+                    <h2 id="pumpRecords">0</h2>
+                    <small>Recorded pump activations</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY TABLE -->
+        <section class="section">
+
+            <div class="section-heading history-heading">
+
+                <div>
+                    <h2>Activity Records</h2>
+                    <p>Detailed history of your field activities</p>
+                </div>
+
+                <button class="refresh-btn" onclick="loadHistory()">
+                    ↻ Refresh History
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH AND FILTER -->
+            <div class="history-toolbar">
+
+                <input
+                    type="text"
+                    id="searchHistory"
+                    placeholder="Search by date, crop, rain or action..."
+                >
+
+                <select id="statusFilter">
+                    <option value="all">All Records</option>
+                    <option value="rain">Rain Detected</option>
+                    <option value="no-rain">No Rain</option>
+                    <option value="pump-on">Pump ON</option>
+                    <option value="pump-off">Pump OFF</option>
+                </select>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+            <p id="historyMessage" class="history-message">
+                Loading irrigation history...
+            </p>
+
+
+            <!-- TABLE -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Field</th>
+                            <th>Crop</th>
+                            <th>Soil Moisture</th>
+                            <th>Temperature</th>
+                            <th>Humidity</th>
+                            <th>Rain</th>
+                            <th>Pump Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="historyTableBody">
+
+                        <tr>
+                            <td colspan="9" class="empty-row">
+                                Loading records...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="table-footer">
+                <span id="recordCount">Showing 0 records</span>
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+        <section class="history-info">
+
+            <div class="info-symbol">💡</div>
+
+            <div>
+                <h3>Why is irrigation history important?</h3>
+
+                <p>
+                    Reviewing previous soil moisture and weather readings
+                    helps farmers understand irrigation patterns, avoid
+                    unnecessary watering and make better farming decisions.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>© 2026 Smart Irrigation System</p>
+            <p>Intelligent Farming • Sustainable Future</p>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const HISTORY_API =
+    "http://localhost:5678/webhook/irrigation-history";
+
+let allHistoryRecords = [];
+
+
+// CHECK LOGIN AND LOAD FARMER DETAILS
+document.addEventListener("DOMContentLoaded", function () {
+
+    const savedFarmer = localStorage.getItem("loggedInFarmer");
+
+    if (!savedFarmer) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    const farmer = JSON.parse(savedFarmer);
+
+    document.getElementById("farmerName").textContent =
+        farmer.name || "Farmer";
+
+    document.getElementById("farmerId").textContent =
+        farmer.farmerId || "-";
+
+    document.getElementById("searchHistory")
+        .addEventListener("input", filterHistory);
+
+    document.getElementById("statusFilter")
+        .addEventListener("change", filterHistory);
+
+    loadHistory();
+
+});
+
+
+// FETCH IRRIGATION HISTORY FROM N8N
+async function loadHistory() {
+
+    const message = document.getElementById("historyMessage");
+    const tableBody = document.getElementById("historyTableBody");
+
+    message.textContent = "Loading irrigation history...";
+
+    tableBody.innerHTML = `
+        <tr>
+            <td colspan="9" class="empty-row">
+                Loading records...
+            </td>
+        </tr>
+    `;
+
+    try {
+
+        const farmer = JSON.parse(
+            localStorage.getItem("loggedInFarmer") || "{}"
+        );
+
+        if (!farmer.farmerId || !farmer.fieldId) {
+            throw new Error("Farmer ID or Field ID is missing.");
+        }
+
+        const url = new URL(HISTORY_API);
+
+        url.searchParams.set("farmerId", farmer.farmerId);
+        url.searchParams.set("fieldId", farmer.fieldId);
+
+        const response = await fetch(url.toString());
+
+        const rawData = await response.text();
+
+        if (!response.ok) {
+            throw new Error("Server error: " + response.status);
+        }
+
+        if (!rawData.trim()) {
+            throw new Error("n8n returned an empty response.");
+        }
+
+        const data = JSON.parse(rawData);
+
+        // Accept either a direct array or an object containing data
+        allHistoryRecords = Array.isArray(data)
+            ? data
+            : Array.isArray(data.data)
+                ? data.data
+                : Array.isArray(data.records)
+                    ? data.records
+                    : [];
+
+        // Newest records first
+        allHistoryRecords.sort((a, b) => {
+            return new Date(b.Time || 0) - new Date(a.Time || 0);
+        });
+
+        updateSummary(allHistoryRecords);
+        displayHistory(allHistoryRecords);
+
+        message.textContent = allHistoryRecords.length
+            ? "Your irrigation history has been loaded successfully."
+            : "No irrigation records found for this field.";
+
+    } catch (error) {
+
+        console.error("History loading error:", error);
+
+        message.textContent =
+            "Unable to load history: " + error.message;
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="9" class="empty-row">
+                    No records available. Please refresh and try again.
+                </td>
+            </tr>
+        `;
+
+        updateSummary([]);
+
+    }
+
+}
+
+
+// UPDATE SUMMARY CARDS
+function updateSummary(records) {
+
+    document.getElementById("totalRecords").textContent =
+        records.length;
+
+    const moistureValues = records
+        .map(r => Number(r["Soil Moisture"]))
+        .filter(v => Number.isFinite(v) && v > 0);
+
+    const average = moistureValues.length
+        ? moistureValues.reduce((a, b) => a + b, 0) /
+          moistureValues.length
+        : null;
+
+    document.getElementById("averageMoisture").textContent =
+        average === null ? "--" : average.toFixed(1) + "%";
+
+    const rainCount = records.filter(r => {
+        return String(r.Rain || "").toLowerCase()
+            .includes("rain") &&
+            !String(r.Rain || "").toLowerCase()
+                .includes("no rain");
+    }).length;
+
+    document.getElementById("rainRecords").textContent =
+        rainCount;
+
+    const pumpCount = records.filter(r =>
+        String(r["Pump Status"] || "").toUpperCase() === "ON"
+    ).length;
+
+    document.getElementById("pumpRecords").textContent =
+        pumpCount;
+
+}
+
+
+// DISPLAY HISTORY TABLE
+function displayHistory(records) {
+
+    const tableBody =
+        document.getElementById("historyTableBody");
+
+    tableBody.innerHTML = "";
+
+    if (!records.length) {
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="9" class="empty-row">
+                    No matching records found.
+                </td>
+            </tr>
+        `;
+
+        document.getElementById("recordCount").textContent =
+            "Showing 0 records";
+
+        return;
+    }
+
+    records.forEach(record => {
+
+        const row = document.createElement("tr");
+
+        const date = formatDate(record.Time);
+
+        const field = record.Field || "-";
+        const crop = record.Crop || "-";
+
+        const moisture = record["Soil Moisture"] !== ""
+            && record["Soil Moisture"] !== undefined
+            ? record["Soil Moisture"] + "%"
+            : "--";
+
+        const temperature = record.Temperature !== ""
+            && record.Temperature !== undefined
+            ? record.Temperature + " °C"
+            : "--";
+
+        const humidity = record.Humidity !== ""
+            && record.Humidity !== undefined
+            ? record.Humidity + "%"
+            : "--";
+
+        const rain = record.Rain || "-";
+        const pump = record["Pump Status"] || "-";
+        const action = record.Action || "-";
+
+        const rainClass = isRainDetected(rain)
+            ? "rain-badge"
+            : "clear-badge";
+
+        const pumpClass = String(pump).toUpperCase() === "ON"
+            ? "pump-on-badge"
+            : "pump-off-badge";
+
+        row.innerHTML = `
+            <td>${escapeHTML(date)}</td>
+            <td>${escapeHTML(field)}</td>
+            <td>${escapeHTML(crop)}</td>
+            <td>${escapeHTML(moisture)}</td>
+            <td>${escapeHTML(temperature)}</td>
+            <td>${escapeHTML(humidity)}</td>
+            <td>
+                <span class="status-badge ${rainClass}">
+                    ${escapeHTML(rain)}
+                </span>
+            </td>
+            <td>
+                <span class="status-badge ${pumpClass}">
+                    ${escapeHTML(pump)}
+                </span>
+            </td>
+            <td>${escapeHTML(action)}</td>
+        `;
+
+        tableBody.appendChild(row);
+
+    });
+
+    document.getElementById("recordCount").textContent =
+        "Showing " + records.length + " records";
+
+}
+
+
+// DATE FORMATTING
+function formatDate(value) {
+
+    if (!value) return "-";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return String(value);
+    }
+
+    return date.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+}
+
+
+// RAIN DETECTION
+function isRainDetected(value) {
+
+    const rain = String(value).toLowerCase();
+
+    return rain.includes("rain") &&
+           !rain.includes("no rain") &&
+           !rain.includes("clear");
+
+}
+
+
+// SEARCH AND FILTER
+function filterHistory() {
+
+    const search = document
+        .getElementById("searchHistory")
+        .value.toLowerCase();
+
+    const filter = document
+        .getElementById("statusFilter")
+        .value;
+
+    let filtered = allHistoryRecords.filter(record => {
+
+        const searchable = [
+            record.Time,
+            record.Field,
+            record.Crop,
+            record.Rain,
+            record["Pump Status"],
+            record.Action
+        ].join(" ").toLowerCase();
+
+        return searchable.includes(search);
+
+    });
+
+    if (filter === "rain") {
+
+        filtered = filtered.filter(r =>
+            isRainDetected(r.Rain)
+        );
+
+    } else if (filter === "no-rain") {
+
+        filtered = filtered.filter(r =>
+            !isRainDetected(r.Rain)
+        );
+
+    } else if (filter === "pump-on") {
+
+        filtered = filtered.filter(r =>
+            String(r["Pump Status"]).toUpperCase() === "ON"
+        );
+
+    } else if (filter === "pump-off") {
+
+        filtered = filtered.filter(r =>
+            String(r["Pump Status"]).toUpperCase() === "OFF"
+        );
+
+    }
+
+    displayHistory(filtered);
+
+}
+
+
+// PREVENT HTML INJECTION IN TABLE VALUES
+function escapeHTML(value) {
+
+    return String(value ?? "-").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+
+}
+
+
+// LOGOUT
+function logout() {
+
+    localStorage.removeItem("loggedInFarmer");
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+</html>

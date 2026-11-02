@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Smart Irrigation</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/settings.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            💧 <span>Smart Irrigation</span>
+        </div>
+
+        <p class="nav-label">MAIN MENU</p>
+
+        <nav>
+            <a href="dashboard.html">▦ Dashboard</a>
+            <a href="field-details.html">🌾 Field Details</a>
+            <a href="history.html">📊 Irrigation History</a>
+            <a class="active" href="settings.html">⚙️ Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-card">
+                <span>🌱</span>
+                <strong>Smart Farming</strong>
+                <small>Grow better. Save water.</small>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">
+                ↪ Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">ACCOUNT / PREFERENCES</p>
+                <h1>Settings</h1>
+                <p class="page-subtitle">
+                    Manage your account and irrigation preferences.
+                </p>
+            </div>
+
+            <div class="farmer-profile">
+                👨‍🌾
+                <div>
+                    <strong id="farmerName">Farmer</strong>
+                    <small id="farmerId">F001</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- SETTINGS BANNER -->
+
+        <section class="settings-banner">
+
+            <div>
+                <span>PERSONALIZE YOUR EXPERIENCE</span>
+                <h2>Account Settings</h2>
+                <p>
+                    Customize your farming preferences and notification settings.
+                </p>
+            </div>
+
+            <div class="settings-banner-icon">⚙️</div>
+
+        </section>
+
+
+        <!-- PROFILE SETTINGS -->
+
+        <section class="settings-section">
+
+            <div class="settings-heading">
+                <h2>👨‍🌾 Farmer Profile</h2>
+                <p>Your registered account information</p>
+            </div>
+
+            <div class="settings-card">
+
+                <div class="profile-header">
+                    <div class="profile-avatar-large">👨‍🌾</div>
+
+                    <div>
+                        <h3 id="profileName">Farmer</h3>
+                        <span class="account-status">
+                            ● Registered Farmer
+                        </span>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+
+                    <div>
+                        <label>Farmer ID</label>
+                        <strong id="profileFarmerId">-</strong>
+                    </div>
+
+                    <div>
+                        <label>Phone Number</label>
+                        <strong id="profilePhone">-</strong>
+                    </div>
+
+                    <div>
+                        <label>Village</label>
+                        <strong id="profileVillage">-</strong>
+                    </div>
+
+                    <div>
+                        <label>Field ID</label>
+                        <strong id="profileFieldId">-</strong>
+                    </div>
+
+                    <div>
+                        <label>Crop</label>
+                        <strong id="profileCrop">-</strong>
+                    </div>
+
+                </div>
+
+                <p class="profile-note">
+                    Your profile details are read from your registered farmer account.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTIFICATION SETTINGS -->
+
+        <section class="settings-section">
+
+            <div class="settings-heading">
+                <h2>🔔 Notification Preferences</h2>
+                <p>Choose which alerts you want to receive</p>
+            </div>
+
+            <div class="settings-card">
+
+                <div class="setting-row">
+
+                    <div>
+                        <h3>Weather Alerts</h3>
+                        <p>Receive alerts about rain and weather conditions.</p>
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" id="weatherAlerts" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="setting-row">
+
+                    <div>
+                        <h3>Low Soil Moisture Alerts</h3>
+                        <p>Get notified when soil moisture falls below your preferred range.</p>
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" id="moistureAlerts" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+                <div class="setting-row">
+
+                    <div>
+                        <h3>Irrigation Activity Alerts</h3>
+                        <p>Receive updates about recorded pump activities.</p>
+                    </div>
+
+                    <label class="switch">
+                        <input type="checkbox" id="irrigationAlerts" checked>
+                        <span class="slider"></span>
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- IRRIGATION PREFERENCES -->
+
+        <section class="settings-section">
+
+            <div class="settings-heading">
+                <h2>💧 Irrigation Preferences</h2>
+                <p>Set your preferred soil moisture range</p>
+            </div>
+
+            <div class="settings-card">
+
+                <div class="range-setting">
+
+                    <div>
+                        <h3>Minimum Soil Moisture</h3>
+                        <p>Preferred minimum moisture level before irrigation.</p>
+                    </div>
+
+                    <div class="range-control">
+                        <input
+                            type="range"
+                            id="minMoisture"
+                            min="10"
+                            max="80"
+                            value="40"
+                        >
+                        <strong id="minValue">40%</strong>
+                    </div>
+
+                </div>
+
+                <div class="range-setting">
+
+                    <div>
+                        <h3>Maximum Soil Moisture</h3>
+                        <p>Preferred upper moisture level for your field.</p>
+                    </div>
+
+                    <div class="range-control">
+                        <input
+                            type="range"
+                            id="maxMoisture"
+                            min="20"
+                            max="100"
+                            value="70"
+                        >
+                        <strong id="maxValue">70%</strong>
+                    </div>
+
+                </div>
+
+                <p class="settings-note">
+                    These are user preferences only. They do not automatically
+                    control a physical water pump.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SAVE BUTTON -->
+
+        <div class="settings-actions">
+
+            <button class="reset-btn" onclick="resetSettings()">
+                Reset Defaults
+            </button>
+
+            <button class="save-btn" onclick="saveSettings()">
+                ✓ Save Settings
+            </button>
+
+        </div>
+
+        <p id="settingsMessage" class="settings-message" role="status"></p>
+
+
+        <!-- ACCOUNT -->
+
+        <section class="settings-section">
+
+            <div class="settings-heading">
+                <h2>🔐 Account</h2>
+                <p>Manage your account session</p>
+            </div>
+
+            <div class="settings-card account-card">
+
+                <div>
+                    <h3>Logout from your account</h3>
+                    <p>Sign out of your Smart Irrigation account on this device.</p>
+                </div>
+
+                <button class="account-logout" onclick="logout()">
+                    Logout
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+            <p>© 2026 Smart Irrigation System</p>
+            <p>Intelligent Farming • Sustainable Future</p>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+// CHECK LOGIN
+document.addEventListener("DOMContentLoaded", function () {
+
+    const savedFarmer = localStorage.getItem("loggedInFarmer");
+
+    if (!savedFarmer) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    const farmer = JSON.parse(savedFarmer);
+
+    document.getElementById("farmerName").textContent =
+        farmer.name || "Farmer";
+
+    document.getElementById("farmerId").textContent =
+        farmer.farmerId || "-";
+
+    document.getElementById("profileName").textContent =
+        farmer.name || "-";
+
+    document.getElementById("profileFarmerId").textContent =
+        farmer.farmerId || "-";
+
+    document.getElementById("profilePhone").textContent =
+        farmer.phone || "-";
+
+    document.getElementById("profileVillage").textContent =
+        farmer.village || "-";
+
+    document.getElementById("profileFieldId").textContent =
+        farmer.fieldId || "-";
+
+    document.getElementById("profileCrop").textContent =
+        farmer.crop || "-";
+
+    loadSettings();
+
+});
+
+
+// DEFAULT SETTINGS
+const defaultSettings = {
+    weatherAlerts: true,
+    moistureAlerts: true,
+    irrigationAlerts: true,
+    minMoisture: 40,
+    maxMoisture: 70,
+};
+
+
+// LOAD SAVED SETTINGS
+function loadSettings() {
+
+    const saved = JSON.parse(
+        localStorage.getItem("irrigationSettings") || "{}"
+    );
+
+    const settings = {
+        ...defaultSettings,
+        ...saved
+    };
+
+    document.getElementById("weatherAlerts").checked =
+        settings.weatherAlerts;
+
+    document.getElementById("moistureAlerts").checked =
+        settings.moistureAlerts;
+
+    document.getElementById("irrigationAlerts").checked =
+        settings.irrigationAlerts;
+
+    document.getElementById("minMoisture").value =
+        settings.minMoisture;
+
+    document.getElementById("maxMoisture").value =
+        settings.maxMoisture;
+
+    document.getElementById("themeSelect").value =
+        settings.theme;
+
+    updateRangeLabels();
+
+}
+
+
+// UPDATE RANGE VALUES
+function updateRangeLabels() {
+
+    document.getElementById("minValue").textContent =
+        document.getElementById("minMoisture").value + "%";
+
+    document.getElementById("maxValue").textContent =
+        document.getElementById("maxMoisture").value + "%";
+
+}
+
+document.getElementById("minMoisture")
+    .addEventListener("input", updateRangeLabels);
+
+document.getElementById("maxMoisture")
+    .addEventListener("input", updateRangeLabels);
+
+
+// SAVE SETTINGS
+function saveSettings() {
+
+    const min = Number(
+        document.getElementById("minMoisture").value
+    );
+
+    const max = Number(
+        document.getElementById("maxMoisture").value
+    );
+
+    if (min >= max) {
+        alert("Maximum moisture must be greater than minimum moisture.");
+        return;
+    }
+
+    const settings = {
+
+        weatherAlerts:
+            document.getElementById("weatherAlerts").checked,
+
+        moistureAlerts:
+            document.getElementById("moistureAlerts").checked,
+
+        irrigationAlerts:
+            document.getElementById("irrigationAlerts").checked,
+
+        minMoisture: min,
+
+        maxMoisture: max,
+
+        theme:
+            document.getElementById("themeSelect").value
+
+    };
+
+    localStorage.setItem(
+        "irrigationSettings",
+        JSON.stringify(settings)
+    );
+
+    applyTheme(settings.theme);
+
+    const message = document.getElementById("settingsMessage");
+
+    message.textContent = "✓ Settings saved successfully!";
+    message.style.color = "#168650";
+
+}
+
+
+// RESET SETTINGS
+function resetSettings() {
+
+    if (!confirm("Reset all settings to default values?")) {
+        return;
+    }
+
+    localStorage.setItem(
+        "irrigationSettings",
+        JSON.stringify(defaultSettings)
+    );
+
+    loadSettings();
+
+    applyTheme("light");
+
+    document.getElementById("settingsMessage").textContent =
+        "Settings restored to default values.";
+
+}
+
+
+// APPLY THEME
+function applyTheme(theme) {
+
+    document.body.classList.toggle(
+        "dark-theme",
+        theme === "dark"
+    );
+
+}
+
+
+// LOGOUT
+function logout() {
+
+    localStorage.removeItem("loggedInFarmer");
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+</html>

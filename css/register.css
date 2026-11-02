@@ -1,0 +1,142 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f2f7f3;
+    color: #193b2b;
+}
+
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 15px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.07);
+}
+
+.register-logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    background: #e7f5eb;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.register-card h1 {
+    font-size: 25px;
+    color: #14532d;
+}
+
+.subtitle {
+    color: #82938a;
+    font-size: 13px;
+    margin: 10px 0 28px;
+    line-height: 1.6;
+}
+
+form h3 {
+    color: #168650;
+    font-size: 14px;
+    margin: 25px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8eee9;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #315d43;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #dfe9e2;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #168650;
+    box-shadow: 0 0 0 3px rgba(22,134,80,.08);
+}
+
+#registerBtn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    background: #168650;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#registerBtn:hover {
+    background: #106b3e;
+}
+
+#registerBtn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#registerMessage {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.login-link {
+    text-align: center;
+    font-size: 12px;
+    color: #82938a;
+    margin-top: 22px;
+}
+
+.login-link a {
+    color: #168650;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media(max-width: 600px) {
+    .register-card {
+        padding: 25px 20px;
+    }
+
+    .register-card h1 {
+        font-size: 22px;
+    }
+}

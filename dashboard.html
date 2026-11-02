@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation | Farmer Dashboard</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">💧</span>
+            <span>Smart<span class="logo-light">Irrigation</span></span>
+        </div>
+
+        <p class="nav-label">MAIN MENU</p>
+
+        <nav>
+            <a class="active" href="dashboard.html"><span>▦</span> Dashboard</a>
+            <a href="field-details.html"><span>🌾</span> Field Details</a>
+            <a href="history.html"><span>◷</span> Irrigation History</a>
+            <a href="settings.html"><span>⚙</span> Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-card">
+                <strong>Smart Farming</strong>
+                <small>Grow better. Save water.</small>
+            </div>
+            <button class="logout-btn" onclick="logout()">↪ Logout</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">FARM MANAGEMENT / OVERVIEW</p>
+                <h1>Farmer Dashboard</h1>
+                <p class="page-subtitle">Monitor your field and manage irrigation efficiently.</p>
+            </div>
+
+            <div class="farmer-profile">
+                <div class="profile-avatar">👨‍🌾</div>
+                <div>
+                    <strong id="farmerName">Farmer</strong>
+                    <small id="farmerId">F001</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="welcome-card">
+            <div>
+                <span class="welcome-label">WELCOME BACK</span>
+                <h2>Hello, <span id="welcomeName">Farmer</span>!</h2>
+                <p>Your farm overview and irrigation insights are ready.</p>
+            </div>
+            <div class="welcome-art"></div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Field Overview</h2>
+                    <p>Your registered farm information</p>
+                </div>
+                <span class="section-tag">FIELD DETAILS</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">🌾</div>
+                    <div>
+                        <span>Field ID</span>
+                        <strong id="fieldId">-</strong>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <span>Village</span>
+                        <strong id="village">-</strong>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🌱</div>
+                    <div>
+                        <span>Crop</span>
+                        <strong id="crop">-</strong>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">💧</div>
+                    <div>
+                        <span>Irrigation Type</span>
+                        <strong>Smart Irrigation</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section weather-panel">
+            <div class="section-heading">
+                <div>
+                    <h2>Weather Monitoring</h2>
+                    <p>Check current weather conditions for your field.</p>
+                </div>
+                <div class="weather-icon">🌦️</div>
+            </div>
+
+            <div class="weather-action">
+                <div>
+                    <strong>Live Weather & Rain Detection</strong>
+                    <small>Get the latest weather information before irrigation.</small>
+                </div>
+
+                <button id="checkRainBtn" type="button" onclick="checkRain()">
+                    🌧️ Check Rain Now
+                </button>
+            </div>
+
+            <p id="rainMessage" class="rain-message" role="status">
+                Weather data has not been checked yet.
+            </p>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Live Monitoring</h2>
+                    <p>Current field and atmospheric readings</p>
+                </div>
+                <span class="live-status"><span></span> Live</span>
+            </div>
+
+            <div class="sensor-grid">
+
+                <div class="sensor-card">
+                    <div class="sensor-top">
+                        <span class="sensor-icon blue">💧</span>
+                        <span class="sensor-label">SOIL MOISTURE</span>
+                    </div>
+                    <h3 id="soilMoisture">-- %</h3>
+                    <div class="sensor-footer">
+                        <span>Optimal range: 40–70%</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="sensor-top">
+                        <span class="sensor-icon orange">🌡️</span>
+                        <span class="sensor-label">TEMPERATURE</span>
+                    </div>
+                    <h3 id="temperature">-- °C</h3>
+                    <div class="sensor-footer">
+                        <span>Current air temperature</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="sensor-top">
+                        <span class="sensor-icon cyan">💦</span>
+                        <span class="sensor-label">HUMIDITY</span>
+                    </div>
+                    <h3 id="humidity">-- %</h3>
+                    <div class="sensor-footer">
+                        <span>Current air humidity</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card rain-sensor">
+                    <div class="sensor-top">
+                        <span class="sensor-icon purple">🌧️</span>
+                        <span class="sensor-label">RAIN STATUS</span>
+                    </div>
+                    <h3 id="rainStatus">Not checked</h3>
+                    <div class="sensor-footer">
+                        <span>Weather API result</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Irrigation Management</h2>
+                    <p>Monitor and control the water pump</p>
+                </div>
+            </div>
+
+            <div class="pump-card">
+                <div class="pump-details">
+                    <div class="pump-icon">🚰</div>
+                    <div>
+                        <h3>Water Pump</h3>
+                        <p id="pumpText">Pump is currently OFF</p>
+                    </div>
+                </div>
+
+                <div id="pumpIndicator" class="pump-indicator off">OFF</div>
+
+                <div class="pump-buttons">
+                    <button class="pump-on" onclick="setPump('ON')">
+                        Turn Pump ON
+                    </button>
+                    <button class="pump-off" onclick="setPump('OFF')">
+                        Turn Pump OFF
+                    </button>
+                </div>
+
+                <p id="pumpNote" class="pump-note">
+                    Demo mode: these buttons update the dashboard only.
+                </p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>© 2026 Smart Irrigation System</p>
+            <p>Intelligent Farming • Sustainable Future</p>
+        </footer>
+
+    </main>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

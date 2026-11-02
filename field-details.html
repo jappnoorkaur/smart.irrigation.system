@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Details | Smart Irrigation</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/field-details.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">💧</span>
+            <span>Smart<span class="logo-light">Irrigation</span></span>
+        </div>
+
+        <p class="nav-label">MAIN MENU</p>
+
+        <nav>
+            <a href="dashboard.html"><span>▦</span> Dashboard</a>
+            <a class="active" href="field-details.html"><span>🌾</span> Field Details</a>
+            <a href="history.html"><span>◷</span> Irrigation History</a>
+            <a href="settings.html"><span>⚙</span> Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-card">
+                <strong>Smart Farming</strong>
+                <small>Grow better. Save water.</small>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">↪ Logout</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">FARM MANAGEMENT / FIELD DETAILS</p>
+                <h1>Field Details</h1>
+                <p class="page-subtitle">View your registered field and crop information.</p>
+            </div>
+
+            <div class="farmer-profile">
+                <div class="profile-avatar">👨‍🌾</div>
+                <div>
+                    <strong id="farmerName">Farmer</strong>
+                    <small id="farmerId">F001</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="field-banner">
+            <div>
+                <span>REGISTERED AGRICULTURAL FIELD</span>
+                <h2 id="fieldTitle">Your Field</h2>
+                <p>Manage and monitor your agricultural land.</p>
+            </div>
+            <div class="banner-icon">🌾</div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Basic Field Information</h2>
+                    <p>Details associated with your registered field</p>
+                </div>
+                <span class="section-tag">FIELD PROFILE</span>
+            </div>
+
+            <div class="detail-grid">
+
+                <div class="detail-card">
+                    <div class="detail-icon">🆔</div>
+                    <span>Field ID</span>
+                    <strong id="fieldId">-</strong>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">👨‍🌾</div>
+                    <span>Farmer Name</span>
+                    <strong id="detailFarmer">-</strong>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">📞</div>
+                    <span>Phone Number</span>
+                    <strong id="phone">-</strong>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">📍</div>
+                    <span>Village</span>
+                    <strong id="village">-</strong>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Crop Information</h2>
+                    <p>Information about the crop cultivated in your field</p>
+                </div>
+            </div>
+
+            <div class="crop-panel">
+                <div class="crop-visual">🌱</div>
+
+                <div class="crop-content">
+                    <span>CURRENTLY CULTIVATED CROP</span>
+                    <h2 id="crop">-</h2>
+                    <p>Crop registered for this agricultural field.</p>
+                </div>
+
+                <div class="crop-status">
+                    <span class="status-dot"></span>
+                    Registered
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Field Monitoring</h2>
+                    <p>Latest available field readings</p>
+                </div>
+                <span class="section-tag">LATEST DATA</span>
+            </div>
+
+            <div class="detail-grid">
+
+                <div class="detail-card">
+                    <div class="detail-icon">💧</div>
+                    <span>Soil Moisture</span>
+                    <strong id="soilMoisture">-- %</strong>
+                    <small>Optimal range: 40–70%</small>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">🌡️</div>
+                    <span>Temperature</span>
+                    <strong id="temperature">-- °C</strong>
+                    <small>Current air temperature</small>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">💦</div>
+                    <span>Humidity</span>
+                    <strong id="humidity">-- %</strong>
+                    <small>Current air humidity</small>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">🌧️</div>
+                    <span>Rain Status</span>
+                    <strong id="rainStatus">Not checked</strong>
+                    <small>Latest weather result</small>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section location-panel">
+            <div>
+                <h2>📍 Field Location</h2>
+                <p>Registered location of your agricultural field.</p>
+                <strong id="locationText">Location information not available</strong>
+            </div>
+            <div class="location-icon">🗺️</div>
+        </section>
+
+        <div class="page-actions">
+            <a href="dashboard.html">← Back to Dashboard</a>
+        </div>
+
+        <footer class="footer">
+            <p>© 2026 Smart Irrigation System</p>
+            <p>Intelligent Farming • Sustainable Future</p>
+        </footer>
+
+    </main>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const savedData = localStorage.getItem("loggedInFarmer");
+
+    if (!savedData) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    const farmer = JSON.parse(savedData);
+
+    document.getElementById("farmerName").textContent =
+        farmer.name || "Farmer";
+
+    document.getElementById("farmerId").textContent =
+        farmer.farmerId || "-";
+
+    document.getElementById("fieldTitle").textContent =
+        "Field " + (farmer.fieldId || "-");
+
+    document.getElementById("fieldId").textContent =
+        farmer.fieldId || "-";
+
+    document.getElementById("detailFarmer").textContent =
+        farmer.name || "-";
+
+    document.getElementById("phone").textContent =
+        farmer.phone || "-";
+
+    document.getElementById("village").textContent =
+        farmer.village || "-";
+
+    document.getElementById("crop").textContent =
+        farmer.crop || "-";
+
+    const weatherData = JSON.parse(
+        localStorage.getItem("latestWeatherData") || "{}"
+    );
+
+    document.getElementById("soilMoisture").textContent =
+        weatherData.soilMoisture !== undefined
+            ? weatherData.soilMoisture + " %"
+            : "-- %";
+
+    document.getElementById("temperature").textContent =
+        weatherData.temperature !== undefined
+            ? weatherData.temperature + " °C"
+            : "-- °C";
+
+    document.getElementById("humidity").textContent =
+        weatherData.humidity !== undefined
+            ? weatherData.humidity + " %"
+            : "-- %";
+
+    document.getElementById("rainStatus").textContent =
+        weatherData.rainStatus || "Not checked";
+
+    if (farmer.latitude && farmer.longitude) {
+        document.getElementById("locationText").textContent =
+            farmer.latitude + ", " + farmer.longitude;
+    } else {
+        document.getElementById("locationText").textContent =
+            farmer.village || "Location information not available";
+    }
+});
+
+function logout() {
+    localStorage.removeItem("loggedInFarmer");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

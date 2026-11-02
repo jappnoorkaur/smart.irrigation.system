@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Registration | Smart Irrigation</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/register.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="register-container">
+    <div class="register-card">
+
+        <div class="register-logo">💧</div>
+
+        <h1>Farmer Registration</h1>
+        <p class="subtitle">Join Smart Irrigation and manage your farm efficiently.</p>
+
+        <form id="registerForm">
+
+            <h3>Personal Information</h3>
+
+            <div class="form-group">
+                <label>Farmer Name *</label>
+                <input type="text" id="name"
+                       placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" id="phone"
+                       placeholder="10-digit mobile number"
+                       pattern="[6-9][0-9]{9}"
+                       maxlength="10" required>
+            </div>
+
+            <div class="form-group">
+                <label>Village Name *</label>
+                <input type="text" id="village"
+                       placeholder="Enter village name" required>
+            </div>
+
+            <h3>Field Information</h3>
+
+            <div class="form-group">
+                <label>Field Name *</label>
+                <input type="text" id="field"
+                       placeholder="Enter field name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Crop Name *</label>
+                <select id="crop" required>
+                    <option value="">Select your crop</option>
+                    <option value="Wheat">Wheat</option>
+                    <option value="Rice">Rice</option>
+                    <option value="Maize">Maize</option>
+                    <option value="Cotton">Cotton</option>
+                    <option value="Sugarcane">Sugarcane</option>
+                    <option value="Mustard">Mustard</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- This field appears only when Other is selected -->
+            <div class="form-group" id="otherCropGroup" style="display:none;">
+                <label>Enter Crop Name *</label>
+                <input type="text" id="otherCrop"
+                       placeholder="Enter crop name">
+            </div>
+
+            <div class="form-group">
+                <label>Latitude *</label>
+                <input type="number" id="latitude"
+                       step="any"
+                       placeholder="Enter latitude" required>
+            </div>
+
+            <div class="form-group">
+                <label>Longitude *</label>
+                <input type="number" id="longitude"
+                       step="any"
+                       placeholder="Enter longitude" required>
+            </div>
+
+            <div class="form-group">
+                <label>Soil Moisture (%) *</label>
+                <input type="number" id="soilMoisture"
+                       min="0" max="100"
+                       step="any"
+                       placeholder="Enter soil moisture percentage"
+                       required>
+            </div>
+
+            <button type="submit" id="registerBtn">
+                Register Farmer
+            </button>
+
+            <p id="registerMessage" role="status"></p>
+
+        </form>
+
+        <div class="login-link">
+            Already registered?
+            <a href="index.html">Login here</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/register.js"></script>
+
+</body>
+</html>
